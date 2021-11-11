@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Leidson Cruz</title>
+    <link>https://leidsondias.github.io/tags/</link>
+    <description>Recent content in Tags on Leidson Cruz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Tue, 01 Dec 2020 20:35:53 +0000</lastBuildDate><atom:link href="https://leidsondias.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Closures Functions</title>
+      <link>https://leidsondias.github.io/tags/closures-functions/</link>
+      <pubDate>Tue, 01 Dec 2020 20:35:53 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/tags/closures-functions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>JavaScript</title>
+      <link>https://leidsondias.github.io/tags/javascript/</link>
+      <pubDate>Tue, 01 Dec 2020 20:35:53 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Javascript Tips</title>
+      <link>https://leidsondias.github.io/tags/javascript-tips/</link>
+      <pubDate>Tue, 01 Dec 2020 20:35:53 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/tags/javascript-tips/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Code Review</title>
+      <link>https://leidsondias.github.io/tags/code-review/</link>
+      <pubDate>Sun, 25 Oct 2020 22:33:46 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/tags/code-review/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>https://leidsondias.github.io/tags/git/</link>
+      <pubDate>Sun, 25 Oct 2020 22:33:46 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Chrome Extension</title>
+      <link>https://leidsondias.github.io/tags/chrome-extension/</link>
+      <pubDate>Mon, 27 May 2019 08:05:48 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/tags/chrome-extension/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://leidsondias.github.io/tags/python/</link>
+      <pubDate>Mon, 27 May 2019 08:05:48 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Event Driven Architecture</title>
+      <link>https://leidsondias.github.io/tags/event-driven-architecture/</link>
+      <pubDate>Wed, 22 May 2019 20:12:49 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/tags/event-driven-architecture/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Redux</title>
+      <link>https://leidsondias.github.io/tags/redux/</link>
+      <pubDate>Wed, 22 May 2019 20:12:49 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/tags/redux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web Components</title>
+      <link>https://leidsondias.github.io/tags/web-components/</link>
+      <pubDate>Wed, 22 May 2019 20:12:49 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/tags/web-components/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Web Components with Redux</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  
+  
+  
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  
+
+  
+
+  
+  
+  <meta name="description" content="Do you need use Web Components in your application? No, you don’t need it. I’m totally against the hype. You should use if only you need. I see some advantages to use if you really need it. For example componentization and your advantages, very small final bundle size, etc.
+In the article I talk about a project we(My team) started at globo.com. The project was build Stories like Instagram. We use ZuckJS for a POC(proof of concept) but we need to customize a lot this lib. It was a very expensive cost to customize, so I start writing a Vanilla Javascript Lib and after I transform it to Web Components. You can see here the vanilla version — branch master.
+">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="Web Components with Redux">
+    <meta name="twitter:description" content="Do you need use Web Components in your application? No, you don’t need it. I’m totally against the hype. You should use if only you need. I see some advantages to use if you really need it. For example componentization and your advantages, very small final bundle size, etc.
+In the article I talk about a project we(My team) started at globo.com. The project was build Stories like Instagram. We use ZuckJS for a POC(proof of concept) but we need to customize a lot this lib. It was a very expensive cost to customize, so I start writing a Vanilla Javascript Lib and after I transform it to Web Components. You can see here the vanilla version — branch master.
+">
+    <meta name="twitter:image" content="/images/avatar.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Web Components with Redux">
+  <meta property="og:description" content="Do you need use Web Components in your application? No, you don’t need it. I’m totally against the hype. You should use if only you need. I see some advantages to use if you really need it. For example componentization and your advantages, very small final bundle size, etc.
+In the article I talk about a project we(My team) started at globo.com. The project was build Stories like Instagram. We use ZuckJS for a POC(proof of concept) but we need to customize a lot this lib. It was a very expensive cost to customize, so I start writing a Vanilla Javascript Lib and after I transform it to Web Components. You can see here the vanilla version — branch master.
+">
+  <meta property="og:url" content="https://leidsondias.github.io/post/web-components-with-redux/">
+  <meta property="og:image" content="/images/avatar.jpg">
+
+
+
+
+<meta name="generator" content="Hugo 0.78.1">
+
+
+<link rel="canonical" href="https://leidsondias.github.io/post/web-components-with-redux/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc">
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587">
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Leidson Cruz">
+<meta name="msapplication-tooltip" content="Leidson Cruz">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="manifest" href="/manifest.json">
+
+
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+<link rel="preload" href="/styles/custom.min.css" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="/images/avatar.jpg" as="image">
+<link rel="preload" href="/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+<link rel="stylesheet" href="/styles/custom.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="https://leidsondias.github.io/"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
+  
+  <h2 class="title"><a href="https://leidsondias.github.io/">Leidson Cruz</a></h2>
+  
+  <p class="subtitle">~ Engineering Lead ~</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/post/">Posts</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:leidson89@gmail.com" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/leidsondias" rel="me" title="GitHub" aria-label="GitHub">
+	    <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//medium.com/@leidson" rel="me" title="Medium" aria-label="Medium">
+            <span class="icon icon-medium" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.linkedin.com/in/leidsoncruz" rel="me" title="LinkedIn" aria-label="LinkedIn">
+            <span class="icon icon-linkedin" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Web Components with Redux</h1>
+      <p class="post-meta">@Leidson Cruz · May 22, 2019 · 8 min read</p>
+    </header>
+    <article class="post-content"><p>Do you need use Web Components in your application? No, you don’t need it. I’m totally against the hype. You should use if only you need. I see some advantages to use if you really need it. For example componentization and your advantages, very small final bundle size, etc.</p>
+<p>In the article I talk about a project we(My team) started at <a href="https://www.globo.com/">globo.com</a>. The project was build <strong>Stories</strong> like <strong>Instagram</strong>. We use <a href="https://github.com/ramon82/zuck.js/">ZuckJS</a> for a POC(proof of concept) but we need to customize a lot this lib. It was a very expensive cost to customize, so I start writing a Vanilla Javascript Lib and after I transform it to Web Components. You can see <a href="https://github.com/leidsondias/storiesJSOlder">here</a> the vanilla version — branch master.</p>
+<p>At first, I had some troubles to share data between components. I do not want to use any plugin for help with this problem, I wanted to solve with what Web Components provides me and Vanilla Javascript.</p>
+<p>If you want to go for Redux topic click <a href="#13e6">here</a>. I tell first what approaches I did use before going to use Redux.</p>
+<h2 id="observing-changes-to-attributes">Observing changes to attributes</h2>
+<p>The Web Components has a method called <a href="https://developers.google.com/web/fundamentals/web-components/customelements#attrchanges">observedAttribute</a>s , works this way: every time is your observed attribute change, his call an another method called as <a href="https://developers.google.com/web/fundamentals/web-components/customelements#attrchanges">attributeChangedCallback</a> . This second method has three parameters: <em>name, oldValue <em>and</em> newValue</em>.</p>
+<p>So, the first approach I did use for pass data to mine elements was set up an attribute and use <code>attributeChangedCallback</code> when having attribute changed for change the visualization:</p>
+<!-- raw HTML omitted -->
+<p>I have an array of objects called as <code>slides</code> and on my component <code>stories-story</code> I receive the object for use in another component the <code>story-items</code>. How you see, if my object <code>slides</code> are large my tag from HTML stays too big and too polluted. So, how you can imagine is not better way to share data between components. In my opinion, works if it is for small things, on the documentation you can see an <a href="https://developers.google.com/web/fundamentals/web-components/customelements#attrchanges">example</a> of use to check if an attribute is disabled or not and from according value sets another attributes on the component.</p>
+<h2 id="event-driven-architecture">Event-driven Architecture</h2>
+<p>In <strong>event-driven architecture</strong> you send and/or listening events, for example if in <code>Component A </code>I need the data from <code>Component B</code> , my <code>Component A</code> need has two events. One for listening and another for tell <code>Component B</code> to want your data. For <code>Component B</code> is the same, needs an event for listening if any component wants data and another to send the data:</p>
+<!-- raw HTML omitted -->
+<p>Try paste this in your browser console. You will see the order for execute is: *get data (ComponentA), send data(ComponentB) *and <em>receive data(ComponentA).</em></p>
+<p>So my other approach was to use <strong>event-driven architecture</strong> to work with objects and not need to set attributes on elements. Who started migrate to this architecture was my friend <a href="https://medium.com/@ricardo.linorj">Ricardo Lino</a>, he created a wrapper for events dispatch called as <code>EventEmitter</code> .</p>
+<p>The <code>EventEmitter</code> is our wrapper for events management:</p>
+<!-- raw HTML omitted -->
+<p>The most important methods are: *on *and *dispatch. *The first is to listen to what you want and the second is to dispatch what event you want.</p>
+<p>Below you can see an example for component with listening and dispatch events. Is the same component from the first example (Example 1). The <code>stories-story</code> component but written really like a component and now is reusable.</p>
+<!-- raw HTML omitted -->
+<p>Wow, now we have a reusable component with your responsibilities and scopes. But, our mistake was try to migrate code instead of creating from start but starting with <strong>event-driven architecture</strong>. We found a lot of bugs because the Vanilla way was based on find elements from parents or children. Also, I didn’t like needs two methods for get an object. So on our migration process, we needed to close the POC and it had a high cost for close because of the bugs . And the high cost is not are welcome to a POC. This way we stop the project (you can find <a href="https://github.com/leidsondias/storiesJSOlder">here</a> —branch is feature/EventEmitter).</p>
+<p>I really enjoyed this challenge, write Stories with web components. So, I started again but this time using <a href="https://redux.js.org/">Redux</a> to help me with events and data.</p>
+<h2 id="using-redux">Using Redux</h2>
+<p>Why will use <strong>Redux</strong>? Using <strong>Redux</strong> my code became is very simple and very easy to get data in the other components. With it my problems for events control is over as like bugs create by us on the migration progress (<strong>Vanilla</strong> &gt; <strong>Web Components</strong>) haha.</p>
+<p>See below the same component from <em>Example 1</em>:</p>
+<!-- raw HTML omitted -->
+<p>Now my Event Emitter has just methods for <em>subscribing</em>, <em>dispatch</em> and <em>getState</em> from <strong>Store</strong> (You can read about Store <a href="https://redux.js.org/api/store">here</a>).</p>
+<!-- raw HTML omitted -->
+<p><strong>Redux</strong> has the same idea an <strong>event-driven architecture</strong>. Dispatch one event and have another event to listening and fired some function.</p>
+<p>For getting started we need configuration our <code>Store</code> . The store is a place where you have states of components and only change him through actions.</p>
+<!-- raw HTML omitted -->
+<p>Our <code>Reducer</code>(In this example I merge the files but the reducer for Story it’s at another file). The **Reducer **has the responsibility to tell how the application state changes from the according to action send to store:</p>
+<!-- raw HTML omitted -->
+<p>So when we receive an action to <code>LOAD_STORIES</code> our reducer gets the state from <code>reducerStories</code> and change the <code>stories</code> key with what the action send on <code>payload</code> key. For the <code>SET_ACTIVE_STORY</code> action is the same thing only changing the key, instead of <code>stories</code> is <code>activeStory</code> .</p>
+<p>Below is the same component as <em>Example 1</em> but with another name. I renamed and make the component cleaner and with more clear responsibility:</p>
+<!-- raw HTML omitted -->
+<p>Now, we have new stuff *loadStories and connectedCallback *in our code.</p>
+<p>In the first line, we have the <code>loadStories</code> , the function responsibility is to load the data and call the action for send to the store. We receive the data from params, but you can fetch in some API or from another way. The code for <code>loadStories</code> is this:</p>
+<!-- raw HTML omitted -->
+<p>You can see what <code>ACTIONS.LOAD_STORIES</code> do on our from <strong>Reducer</strong> file in the 13º line. Basically, keeps state and change the state from <code>stories</code> key for what we pass from the <code>payload</code>.</p>
+<p>I use the <code>connectedCallback</code> method for initializing our component. Why I use <code>connectedCallback</code> instead of <code>constructor</code> ? The <code>constructor</code> is for you to set up your component and initialize your state, but it is called only one time. So, if the data is dynamic it’s never changed because your component was be started and will not calls the constructor again. The <code>connectedCallback</code> is called every time the element is inserted into the DOM. The documentation and the good practices recommend you use to fetch resources or rendering your component. You can find good practices for web components <a href="https://developers.google.com/web/fundamentals/web-components/best-practices">here</a>.</p>
+<p>Ok, I load my data on the store now I can work with the data. Our data have an array of objects. Each object is a story data. Below you can see an example for values from the stories key:</p>
+<!-- raw HTML omitted -->
+<p>The <code>Stories</code> component adds the <code>StoriesList.</code> And inside from this component we can get the <code>stories</code> saved on our state and make what we want. (In our case we use a Component for render each story)</p>
+<!-- raw HTML omitted -->
+<p>Now we can call <code>getState</code> from <code>EventEmitter</code> and get state from any reducer. You can see how get the state in the 19º line. In the 20º line, we iterate the <code>stories</code> and create a <strong>Story</strong> component for each data from <code>stories</code>.</p>
+<p>Until now, we see how <strong>dispatch an event</strong> and <strong>get state</strong> from <strong>Redux</strong>. Missed anything? Yeah, the subscribe method for listening when the state change and fire any method. For example, render every time we receiver a new data.</p>
+<!-- raw HTML omitted -->
+<p>The <code>Modal</code> component listens if have a change for the state. If has, the <code>render</code> method is executed. You can see this code on the 12º line. In the <code>render</code> method, we check if exist any story active. If we have an active story we create the <code>SlideList</code> component and append on the <code>Modal</code> component.</p>
+<p>A bad point this code is you listening to all events when state changes, not just when <code>activeStory </code>changes. We need to improve this code for not listening all, you can create an abstract class for control this. For now, it is no problem for our code but is a thing for change on the next steps.</p>
+<p>A good refactoring is to isolate our components, we can use <strong>containers pattern</strong>.</p>
+<p>But what we gain with this change? We will have a component reusable in any place without need your data provider is to be <code>Redux</code>. Also, this way is easier to test your component, because you just need pass the fixture to it and test. Without use <strong>containers pattern</strong> we need to use <code>MockStore</code> to test our components.</p>
+<p>So an example of how to use containers on our example:</p>
+<!-- raw HTML omitted -->
+<p>So, now our component receives two params: *object *and the *loadStories *function. If you don’t know what <code>{ stories }</code> do, this is called the destructor you can found detail explanation <a href="https://gist.github.com/leidsondias/ff40f2bbc505c473e6f56bea070a2864">here</a>, but basically what this does is — extract the stories key from object I received on the params. <em>loadStories</em> are the same function that we import on the before examples. But this time we do not have a connection with <strong>Redux</strong>, **Actions, Reducers **or our **Event Emitter. **This way, you only have to pass data and the function to test the component. If you want, you can pass an empty function.</p>
+<p>Our container is this:</p>
+<!-- raw HTML omitted -->
+<p>The container has the <code>loadStories</code> action, responsibility for dispatch event to load data to store.</p>
+<p>And now in the main file, we call the container instead of the component.</p>
+<!-- raw HTML omitted -->
+<p>If you want, you can create the container how like class. In my case I don’t guess is necessary, so just the function resolves my problem.</p>
+<p>You can follow all the progress for the project <a href="https://github.com/leidsondias/storiesJS">here</a> and contribute too. I’am writing slowly because I moved to another country and I have a lot to solve and take care of. But I will finish and hope in a few months.</p>
+<p>I hope you have liked it and any suggestions or doubts are welcome. If you want correct my English I will like too hahaha ❤</p>
+<p>The original post is <a href="https://medium.com/@leidsoncruz/web-components-with-redux-9e7c2da45602">https://medium.com/@leidsoncruz/web-components-with-redux-9e7c2da45602</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/web-components"><span class="tag">Web Components</span></a></li>
+        
+          <li><a href="/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+          <li><a href="/tags/redux"><span class="tag">Redux</span></a></li>
+        
+          <li><a href="/tags/event-driven-architecture"><span class="tag">Event Driven Architecture</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>904</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2021 Leidson Cruz</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-140735682-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

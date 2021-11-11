@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Javascript: Closures</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  
+  
+  
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  
+
+  
+
+  
+  
+  <meta name="description" content="If you don’t know what Context or Scope is, I recommend you to read a previous post talking about Context VS Scope.
+What Closure is?">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="Javascript: Closures">
+    <meta name="twitter:description" content="If you don’t know what Context or Scope is, I recommend you to read a previous post talking about Context VS Scope.
+What Closure is?">
+    <meta name="twitter:image" content="/images/avatar.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Javascript: Closures">
+  <meta property="og:description" content="If you don’t know what Context or Scope is, I recommend you to read a previous post talking about Context VS Scope.
+What Closure is?">
+  <meta property="og:url" content="https://leidsondias.github.io/post/javascript-closures/">
+  <meta property="og:image" content="/images/avatar.jpg">
+
+
+
+
+<meta name="generator" content="Hugo 0.78.1">
+
+
+<link rel="canonical" href="https://leidsondias.github.io/post/javascript-closures/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc">
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587">
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Leidson Cruz">
+<meta name="msapplication-tooltip" content="Leidson Cruz">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="manifest" href="/manifest.json">
+
+
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+<link rel="preload" href="/styles/custom.min.css" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="/images/avatar.jpg" as="image">
+<link rel="preload" href="/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+<link rel="stylesheet" href="/styles/custom.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="https://leidsondias.github.io/"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
+  
+  <h2 class="title"><a href="https://leidsondias.github.io/">Leidson Cruz</a></h2>
+  
+  <p class="subtitle">~ Engineering Lead ~</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/post/">Posts</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:leidson89@gmail.com" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/leidsondias" rel="me" title="GitHub" aria-label="GitHub">
+	    <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//medium.com/@leidson" rel="me" title="Medium" aria-label="Medium">
+            <span class="icon icon-medium" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.linkedin.com/in/leidsoncruz" rel="me" title="LinkedIn" aria-label="LinkedIn">
+            <span class="icon icon-linkedin" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Javascript: Closures</h1>
+      <p class="post-meta">@Leidson Cruz · Dec 1, 2020 · 4 min read</p>
+    </header>
+    <article class="post-content"><p>If you don’t know what <strong>Context</strong> or <strong>Scope</strong> is, I recommend you to read a previous <a href="https://leidson.com/post/javascript-context-vs-scope/">post</a> talking about <a href="https://leidson.com/post/javascript-context-vs-scope/">Context VS Scope</a>.</p>
+<h3 id="what-closure-is">What Closure is?</h3>
+<p>It is very simple to understand what Closure is. It is functionality to access variables from other Scope, even if the function is pop off from the call stack.</p>
+<p>See the example:</p>
+<pre><code>const closureExample = () =&gt; {
+ const name = &quot;Leidson&quot;;
+  
+  return () =&gt; {
+   return `Hi ${name}`;
+  }
+};
+</code></pre><pre><code>const sayHi = closureExample();//this line, removes the closureExample from the call stack
+</code></pre><pre><code>console.log(sayHi()); //But, we still have the name variable in memory and the result of this execution is: Hi Leidson
+</code></pre><p>How we already saw in the post about context, every time that a function is executed, it creates an execution context. After the function returns, it pops off from the call stack, and the <strong>garbage collector</strong> cleans variables and references. But, in this case, the garbage collector sees: that’s a closure, I need to keep it in the memory because it’ll use after.</p>
+<p>The place name’s of where the variable is kept in memory is <strong>Closure Box</strong> . So, instead of the function goes to the parent scope, it goes to the Closure Box and gets the values.</p>
+<p><strong>An important note</strong> : Closure always <strong>returns</strong> <strong>a</strong> <strong>function</strong> . It is a combination of Function and Lexical Environment (I’ll talk in the next posts about it).</p>
+<blockquote>
+<p>Ok, why closures are interesting or powerful?</p>
+</blockquote>
+<p>Imagine a heavy code, for example, a big returned data from API. You need to get a specified index from this data. So, probably you’ll have a code like this:</p>
+<pre><code>const fetchData = () =&gt; {
+ console.log(&quot;fetch new data!&quot;)
+ return Array.from({length: 99999}, () =&gt; Math.floor(Math.random() * 99999));
+}
+</code></pre><pre><code>const getItem = (index) =&gt; {
+ const data = fetchData();
+  
+ return data[index];
+}
+</code></pre><pre><code>console.log(getItem(1)); //&quot;fetch new data!&quot; &amp; number
+console.log(getItem(12));//&quot;fetch new data!&quot; &amp; number
+console.log(getItem(3)); //&quot;fetch new data!&quot; &amp; number
+</code></pre><p>So, every time that you running the <code>getItem</code>, the <code>fetchData</code> will be running too. Can you imagine how big is it? Now, can you imagine if, instead of fetching data, you’ll have a very heavy operation, how much performance you’ll lose? So, to avoid this, we can use Closures:</p>
+<pre><code>const fetchData = () =&gt; {
+ console.log(&quot;fetch new data!&quot;)
+ return Array.from({length: 99999}, () =&gt; Math.floor(Math.random() * 99999));
+}
+</code></pre><pre><code>const getItemUsingClosure = () =&gt; {
+ const data = fetchData();
+</code></pre><pre><code> return (index) =&gt; data[index];
+}
+</code></pre><pre><code>const getItemClosure = getItemUsingClosure(); //&quot;fetch new data!&quot;
+
+</code></pre><pre><code>console.log(getItemClosure(1)); //number
+console.log(getItemClosure(12));//number
+console.log(getItemClosure(3));//number
+</code></pre><p>What does this code do? When we assign the <code>getItemClosure</code> in a variable, the data variable goes to the <strong>Closure box</strong> . So, every time that you call the <code>getItemClosure</code>, it goes to the Closure box to get the data value instead of needs to call the fetch data again.</p>
+<p>We could have a lot of code after the getItemClosure assigned, and the data value would still be kept in memory, ready to be used when we needed it. For example:</p>
+<pre><code>const fetchData = () =&gt; {
+ console.log(&quot;fetch new data!&quot;)
+ return Array.from({length: 99999}, () =&gt; Math.floor(Math.random() * 99999));
+}
+</code></pre><pre><code>const getItemUsingClosure = () =&gt; {
+ const data = fetchData();
+</code></pre><pre><code>return (index) =&gt; data[index];
+}
+</code></pre><pre><code>const getItemClosure = getItemUsingClosure(); //&quot;fetch new data!&quot;
+</code></pre><pre><code>//DO A LOT OF THINGS, AFTER 1000 LINES:
+</code></pre><pre><code>console.log(getItemClosure(1)); //number
+console.log(getItemClosure(12));//number
+console.log(getItemClosure(3));//number
+</code></pre><pre><code>//Got the same result
+</code></pre><p>We can reuse the example from the post: <a href="https://leidson.com/post/how-to-use-apply-bind-call-in-javascript/">How to use apply, bind &amp; call</a>. Transforming the bind example to use Closure, we can have this:</p>
+<pre><code>const multiply = (a) =&gt; {
+  return (b) =&gt; a * b; 
+}
+</code></pre><pre><code>//another way to write the multiply function:
+//const multiply = (a) =&gt; (b) =&gt; a * b;
+</code></pre><pre><code>const multiplyByTwo = multiply(2);
+const multiplyByThree = multiply(3);
+</code></pre><pre><code>console.log(multiplyByTwo(4)); //8
+console.log(multiplyByThree(4));//12
+</code></pre><p>Well, I hope you enjoy the post and understand the power of Closures. If you have doubts, you can send a message or comment. I’ll be glad to talk and help you.</p>
+<p>The original post is <a href="https://medium.com/@leidson/javascript-closures-629ecd65d7b4">https://medium.com/@leidson/javascript-closures-629ecd65d7b4</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+          <li><a href="/tags/closures-functions"><span class="tag">Closures Functions</span></a></li>
+        
+          <li><a href="/tags/javascript-tips"><span class="tag">Javascript Tips</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>345</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2021 Leidson Cruz</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-140735682-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

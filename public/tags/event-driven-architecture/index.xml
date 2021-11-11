@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Event Driven Architecture on Leidson Cruz</title>
+    <link>https://leidsondias.github.io/tags/event-driven-architecture/</link>
+    <description>Recent content in Event Driven Architecture on Leidson Cruz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Wed, 22 May 2019 20:12:49 +0000</lastBuildDate><atom:link href="https://leidsondias.github.io/tags/event-driven-architecture/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Web Components with Redux</title>
+      <link>https://leidsondias.github.io/post/web-components-with-redux/</link>
+      <pubDate>Wed, 22 May 2019 20:12:49 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/post/web-components-with-redux/</guid>
+      <description>&lt;p&gt;Do you need use Web Components in your application? No, you don’t need it. I’m totally against the hype. You should use if only you need. I see some advantages to use if you really need it. For example componentization and your advantages, very small final bundle size, etc.&lt;/p&gt;
+&lt;p&gt;In the article I talk about a project we(My team) started at &lt;a href=&#34;https://www.globo.com/&#34;&gt;globo.com&lt;/a&gt;. The project was build &lt;strong&gt;Stories&lt;/strong&gt; like &lt;strong&gt;Instagram&lt;/strong&gt;. We use &lt;a href=&#34;https://github.com/ramon82/zuck.js/&#34;&gt;ZuckJS&lt;/a&gt; for a POC(proof of concept) but we need to customize a lot this lib. It was a very expensive cost to customize, so I start writing a Vanilla Javascript Lib and after I transform it to Web Components. You can see &lt;a href=&#34;https://github.com/leidsondias/storiesJSOlder&#34;&gt;here&lt;/a&gt; the vanilla version — branch master.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

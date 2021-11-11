@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>How to use apply, bind &amp; call in Javascript</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  
+  
+  
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  
+
+  
+
+  
+  
+  <meta name="description" content="Photo by Markus Spiske on Unsplash
+This post has the intention to discuss the difference between apply , bind , and call methods.
+">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="How to use apply, bind &amp; call in Javascript">
+    <meta name="twitter:description" content="Photo by Markus Spiske on Unsplash
+This post has the intention to discuss the difference between apply , bind , and call methods.
+">
+    <meta name="twitter:image" content="/images/avatar.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="How to use apply, bind &amp; call in Javascript">
+  <meta property="og:description" content="Photo by Markus Spiske on Unsplash
+This post has the intention to discuss the difference between apply , bind , and call methods.
+">
+  <meta property="og:url" content="https://leidsondias.github.io/post/how-to-use-apply-bind-call-in-javascript/">
+  <meta property="og:image" content="/images/avatar.jpg">
+
+
+
+
+<meta name="generator" content="Hugo 0.78.1">
+
+
+<link rel="canonical" href="https://leidsondias.github.io/post/how-to-use-apply-bind-call-in-javascript/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc">
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587">
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Leidson Cruz">
+<meta name="msapplication-tooltip" content="Leidson Cruz">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="manifest" href="/manifest.json">
+
+
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+<link rel="preload" href="/styles/custom.min.css" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="/images/avatar.jpg" as="image">
+<link rel="preload" href="/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+<link rel="stylesheet" href="/styles/custom.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="https://leidsondias.github.io/"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
+  
+  <h2 class="title"><a href="https://leidsondias.github.io/">Leidson Cruz</a></h2>
+  
+  <p class="subtitle">~ Engineering Lead ~</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/post/">Posts</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:leidson89@gmail.com" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/leidsondias" rel="me" title="GitHub" aria-label="GitHub">
+	    <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//medium.com/@leidson" rel="me" title="Medium" aria-label="Medium">
+            <span class="icon icon-medium" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.linkedin.com/in/leidsoncruz" rel="me" title="LinkedIn" aria-label="LinkedIn">
+            <span class="icon icon-linkedin" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">How to use apply, bind &amp; call in Javascript</h1>
+      <p class="post-meta">@Leidson Cruz · Nov 8, 2020 · 3 min read</p>
+    </header>
+    <article class="post-content"><p><img src="https://cdn-images-1.medium.com/max/11520/0*DqWi0UdvXPtCBVS8" alt="Photo by Markus Spiske on Unsplash"><em>Photo by <a href="https://unsplash.com/@markusspiske?utm_source=medium&amp;utm_medium=referral">Markus Spiske</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<p>This post has the intention to discuss the difference between <strong>apply</strong> , <strong>bind</strong> , and <strong>call</strong> methods.</p>
+<p>In Javascript, functions are <strong>Function Objects</strong> . The <strong>Function Object</strong> has properties like <em>name, arguments, etc.</em> Also, it has methods like <em>apply, bind, call, toString, etc</em> .</p>
+<h2 id="functionprototypeapply">Function.prototype.apply()</h2>
+<p>The <strong>apply()</strong> method invokes the function immediately. When you use it, you need to pass to the function the <strong>this</strong> value. The apply method accepts arguments as an array, but it’s optional. The <strong>this</strong> value indicates the context that the function will execute.</p>
+<p><em>“Ok, I understood. How I use it?”</em></p>
+<pre><code>const animal = function(name, method) {
+ console.log(`${name} do ${this.sound}, using ${method}`);
+}
+</code></pre><pre><code>const dog = { sound: “auuuuuuu” };
+const cat = { sound: “miauuuu” };
+</code></pre><pre><code>animal.apply(dog, [“Thor”, “apply”]);
+// &quot;Thor do auuuuuuu, using apply&quot;
+</code></pre><pre><code>animal.apply(dog, [“Scarlett”, “apply”]);
+//&quot;Scarlett do auuuuuuu, using apply&quot;
+</code></pre><p>It’s like you borrow the function to apply in another context. I’ll give another example:</p>
+<pre><code>const wizard = {
+ name: “Gandalf”,
+ health: 100,
+ heal(hp){
+ this.health += hp
+ }
+};
+</code></pre><pre><code>const archer = {
+ name: “Legolas”,
+ health: 30
+}
+</code></pre><pre><code>wizard.heal.apply(archer, [10]);
+</code></pre><pre><code>console.log(archer);
+//{name: &quot;Legolas&quot;, health: 40}
+</code></pre><h2 id="functionprototypecall">Function.prototype.call()</h2>
+<p>Like the <strong>apply()</strong> method, the <strong>call</strong> invokes the function immediately and receive the <strong>this</strong> value as a parameter. The only difference between the <strong>Apply</strong> and <strong>call</strong> method is how to pass the arguments to them. The <strong>Apply</strong> method receives an array as the arguments. The <strong>call</strong> method receives the arguments as a simple param. Reusing the previous examples:</p>
+<pre><code>const animal = function(name, method) {
+ console.log(`${name} do ${this.sound}, using ${method}`);
+}
+</code></pre><pre><code>const dog = { sound: “auuuuuuu” };
+const cat = { sound: “miauuuu” };
+</code></pre><pre><code>animal.call(dog, “Thor”, “call”);
+// &quot;Thor do auuuuuuu, using call&quot;
+</code></pre><pre><code>animal.call(dog, “Scarlett”, “call”);
+//&quot;Scarlett do auuuuuuu, using call&quot;
+</code></pre><pre><code>const wizard = {
+ name: “Gandalf”,
+ health: 100,
+ heal(hp){
+ this.health += hp
+ }
+};
+</code></pre><pre><code>const archer = {
+ name: “Legolas”,
+ health: 30
+}
+</code></pre><pre><code>wizard.heal.call(archer, 20);
+</code></pre><pre><code>console.log(archer);
+//{name: &quot;Legolas&quot;, health: 50}
+</code></pre><h2 id="functionprototypebind">Function.prototype.bind()</h2>
+<p>The <strong>bind()</strong> is different from the previous methods, doesn’t invoke the function immediately. It returns a new function with a new context ( <strong>this</strong> value). Taking the wizard heal example, we can apply the <strong>bind()</strong> method like this:</p>
+<pre><code>const wizard = {
+ name: “Gandalf”,
+ health: 100,
+ heal(hp){
+ this.health += hp
+ }
+};
+</code></pre><pre><code>const archer = {
+ name: “Legolas”,
+ health: 30
+}
+</code></pre><pre><code>const healArcher = wizard.heal.bind(archer, 45)
+console.log(archer); 
+//Does not change the health of the archer because the function wasn't invoked.
+//{name: &quot;Legolas&quot;, health: 30}
+</code></pre><pre><code>healArcher();
+console.log(archer);
+//{name: &quot;Legolas&quot;, health: 75}
+</code></pre><p>More examples to use the bind method:</p>
+<pre><code>function multiply(a,b){
+ const value = a*b;
+ console.log(“multiply”, value);
+ return value;
+}
+</code></pre><pre><code>let multiplyByTwo = multiply.bind(this, 2);
+multiplyByTwo(4);
+//&quot;multiply&quot;, 8
+</code></pre><pre><code>let multiplyByTen = multiply.bind(this, 10);
+multiplyByTen(4);
+//&quot;multiply&quot;, 40
+</code></pre><p>Thank you for reading and I hope this post will be helpful for you to understand the differences between apply, bind, and call.</p>
+<p>The original post is <a href="https://medium.com/@leidson/how-to-use-apply-bind-call-in-javascript-f47970454b6a">https://medium.com/@leidson/how-to-use-apply-bind-call-in-javascript-f47970454b6a</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>368</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2021 Leidson Cruz</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-140735682-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

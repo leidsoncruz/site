@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Help him!! Help your code reviewer.</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  
+  
+  
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  
+
+  
+
+  
+  
+  <meta name="description" content="Photo by AltumCode on Unsplash
+Recently, I did a talk about Git to colleagues from my new work. The objective was to pass my learnings about Git to them. I learned a lot of Git in my last company. Not just commands but how to make our life easy when we do code review.
+The main goal of this post is what you can do to make easy the life of your code reviewer.">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="Help him!! Help your code reviewer.">
+    <meta name="twitter:description" content="Photo by AltumCode on Unsplash
+Recently, I did a talk about Git to colleagues from my new work. The objective was to pass my learnings about Git to them. I learned a lot of Git in my last company. Not just commands but how to make our life easy when we do code review.
+The main goal of this post is what you can do to make easy the life of your code reviewer.">
+    <meta name="twitter:image" content="/images/avatar.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Help him!! Help your code reviewer.">
+  <meta property="og:description" content="Photo by AltumCode on Unsplash
+Recently, I did a talk about Git to colleagues from my new work. The objective was to pass my learnings about Git to them. I learned a lot of Git in my last company. Not just commands but how to make our life easy when we do code review.
+The main goal of this post is what you can do to make easy the life of your code reviewer.">
+  <meta property="og:url" content="https://leidsondias.github.io/post/help-him-help-your-code-reviewer/">
+  <meta property="og:image" content="/images/avatar.jpg">
+
+
+
+
+<meta name="generator" content="Hugo 0.78.1">
+
+
+<link rel="canonical" href="https://leidsondias.github.io/post/help-him-help-your-code-reviewer/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc">
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587">
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Leidson Cruz">
+<meta name="msapplication-tooltip" content="Leidson Cruz">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="manifest" href="/manifest.json">
+
+
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+<link rel="preload" href="/styles/custom.min.css" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="/images/avatar.jpg" as="image">
+<link rel="preload" href="/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+<link rel="stylesheet" href="/styles/custom.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="https://leidsondias.github.io/"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
+  
+  <h2 class="title"><a href="https://leidsondias.github.io/">Leidson Cruz</a></h2>
+  
+  <p class="subtitle">~ Engineering Lead ~</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/post/">Posts</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:leidson89@gmail.com" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/leidsondias" rel="me" title="GitHub" aria-label="GitHub">
+	    <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//medium.com/@leidson" rel="me" title="Medium" aria-label="Medium">
+            <span class="icon icon-medium" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.linkedin.com/in/leidsoncruz" rel="me" title="LinkedIn" aria-label="LinkedIn">
+            <span class="icon icon-linkedin" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Help him!! Help your code reviewer.</h1>
+      <p class="post-meta">@Leidson Cruz · Oct 25, 2020 · 3 min read</p>
+    </header>
+    <article class="post-content"><p><img src="https://cdn-images-1.medium.com/max/2000/1*G7iDYc0kqrfTAbzzaiPiHg.jpeg" alt="Photo by AltumCode on Unsplash"><em>Photo by <a href="https://unsplash.com/@altumcode?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">AltumCode</a> on <a href="https://unsplash.com/s/photos/code-reviewer?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></em></p>
+<p>Recently, I did a talk about Git to colleagues from my new work. The objective was to pass my learnings about Git to them. I learned a lot of Git in my last company. Not just commands but how to make our life easy when we do code review.</p>
+<p>The main goal of this post is what you can do to make easy the life of your code reviewer. What commands you can use, practices, etc.</p>
+<p><strong>PS</strong>: This is my opinion you aren’t obliged to agree. We can always discuss it.</p>
+<h2 id="what-is-git">What is Git?</h2>
+<p>So, to start, let me give you a little explanation of what Git is. Git is a version control system. It is the most used system for versioning. You can check other version control systems (SVN, CVS, etc).</p>
+<h2 id="what-is-a-commit-why-is-important-to-have-a-well-commit-message">What is a Commit? Why is important to have a well commit message?</h2>
+<p>This command captures a snapshot of the currently staged changes from the project.</p>
+<p>Some projects are legacy or have a lot of people contributing it. So, if you are a rookie on the project or you want to know why the changes were made you can read the commits to understand.</p>
+<p>Therefore, we should write a good commits message to help other developers and to make it easier to do the code review. So, the <strong>first tip</strong> to help the code reviewer is: <strong>write well commits messages</strong>.</p>
+<h2 id="commits-good-practices">Commits good practices</h2>
+<p>A commit should be a wrapper for related changes. For example, creating two different components should produce two separate commits. Produce small commits make it easier for other developers/code reviewers to understand the changes and what context/concern the commit is related to or roll back the changes if something went wrong.</p>
+<p>The <strong>second tip</strong> is: create small commits but always being a wrapper for related changes without mixing concerns.</p>
+<p>The <strong>third tip</strong> never a commit should be a broken commit. Your commit needs to works lonely if it’s needed. You can have WIP commits, but remember to complete the commits before you when open the PR.</p>
+<p>This tip is related by roll back the changes if something went wrong, for you don’t have any risk to go to another commit.</p>
+<p>I see a lot of people want to create a new commit just for the tests. Don’t do it. Following the commit pattern about being a wrapper of related things and working itself, if you create a new commit for a test your old commit will contain wrong things and don’t work alone.</p>
+<p>The <strong>fourth</strong> tip is to use the <strong>fixup</strong> command during the review process. This is a very interesting command and for me, very powerful to make easier the reviewer’s life.</p>
+<p>The <strong>fixup</strong> command creates a new one commit but is a child for another one. If you do the <strong>rebase</strong> with <strong>squash</strong>, you will merge the child commit to the parent commit. For example, the reviewer found a bug and you correct it. The normal is to create a new commit to fix the last commit, but if you do this your last commit will contain a bug and you will have a commit with a problem in your branch. So, we create a fixup commit, and after the reviewer validates the changes you can squash it in the parent commit.</p>
+<p>Below you can see some interesting links about how to write good commit messages and patterns.</p>
+<ol>
+<li>
+<p><a href="https://chris.beams.io/posts/git-commit/">https://chris.beams.io/posts/git-commit/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/trein/dev-best-practices/wiki/Git-Commit-Best-Practices">https://github.com/trein/dev-best-practices/wiki/Git-Commit-Best-Practices</a></p>
+</li>
+</ol>
+<p>I hope this post helps you to think about your Git process and helps to think more about how to use Git most efficiently.</p>
+<p>The original post is <a href="https://medium.com/@leidson/help-him-help-your-code-reviewer-5ce1d68289c4">https://medium.com/@leidson/help-him-help-your-code-reviewer-5ce1d68289c4</a></p>
+</article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/code-review"><span class="tag">Code Review</span></a></li>
+        
+          <li><a href="/tags/git"><span class="tag">Git</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>382</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2021 Leidson Cruz</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-140735682-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>

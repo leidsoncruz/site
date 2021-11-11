@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Chrome Extension on Leidson Cruz</title>
+    <link>https://leidsondias.github.io/tags/chrome-extension/</link>
+    <description>Recent content in Chrome Extension on Leidson Cruz</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Mon, 27 May 2019 08:05:48 +0000</lastBuildDate><atom:link href="https://leidsondias.github.io/tags/chrome-extension/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Transform Medium to Markdown</title>
+      <link>https://leidsondias.github.io/post/transform-medium-to-markdown/</link>
+      <pubDate>Mon, 27 May 2019 08:05:48 +0000</pubDate>
+      
+      <guid>https://leidsondias.github.io/post/transform-medium-to-markdown/</guid>
+      <description>&lt;h2 id=&#34;motivation&#34;&gt;Motivation&lt;/h2&gt;
+&lt;p&gt;In the last year(2018), I and my friend &lt;a href=&#34;https://medium.com/@heliocorreia&#34;&gt;heliocorreia&lt;/a&gt; talk about making the personal website and make a post in it. But, I different from him didn’t want to create a blog system for posting. I thought, why not use Medium with as my publication platform and I build a script to migrate from Medium to Markdown?&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

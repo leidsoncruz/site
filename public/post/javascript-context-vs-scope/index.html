@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>Javascript: Context vs Scope</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  
+  
+  
+  <link href="//www.google-analytics.com" rel="dns-prefetch">
+  
+
+  
+
+  
+  
+  <meta name="description" content="Photo by Irvan Smith on Unsplash
+In the next posts, I’ll talk about the closures and lexical environment . To be easier to understand both. I’ll give more knowledge about context/scope and the difference between them.
+">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="Javascript: Context vs Scope">
+    <meta name="twitter:description" content="Photo by Irvan Smith on Unsplash
+In the next posts, I’ll talk about the closures and lexical environment . To be easier to understand both. I’ll give more knowledge about context/scope and the difference between them.
+">
+    <meta name="twitter:image" content="/images/avatar.jpg">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="Javascript: Context vs Scope">
+  <meta property="og:description" content="Photo by Irvan Smith on Unsplash
+In the next posts, I’ll talk about the closures and lexical environment . To be easier to understand both. I’ll give more knowledge about context/scope and the difference between them.
+">
+  <meta property="og:url" content="https://leidsondias.github.io/post/javascript-context-vs-scope/">
+  <meta property="og:image" content="/images/avatar.jpg">
+
+
+
+
+<meta name="generator" content="Hugo 0.78.1">
+
+
+<link rel="canonical" href="https://leidsondias.github.io/post/javascript-context-vs-scope/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+<meta name="google-site-verification" content="_moDmnnBNVLBN1rzNxyGUGdPHE20YgbmrtzLIbxaWFc">
+<meta name="msvalidate.01" content="22596E34341DD1D17D6022C44647E587">
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Leidson Cruz">
+<meta name="msapplication-tooltip" content="Leidson Cruz">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="manifest" href="/manifest.json">
+
+
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+<link rel="preload" href="/styles/custom.min.css" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="/images/avatar.jpg" as="image">
+<link rel="preload" href="/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+<link rel="stylesheet" href="/styles/custom.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <a href="https://leidsondias.github.io/"><img class="avatar" src="/images/avatar.jpg" alt="Avatar"></a>
+  
+  <h2 class="title"><a href="https://leidsondias.github.io/">Leidson Cruz</a></h2>
+  
+  <p class="subtitle">~ Engineering Lead ~</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/post/">Posts</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:leidson89@gmail.com" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/leidsondias" rel="me" title="GitHub" aria-label="GitHub">
+	    <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//medium.com/@leidson" rel="me" title="Medium" aria-label="Medium">
+            <span class="icon icon-medium" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.linkedin.com/in/leidsoncruz" rel="me" title="LinkedIn" aria-label="LinkedIn">
+            <span class="icon icon-linkedin" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">Javascript: Context vs Scope</h1>
+      <p class="post-meta">@Leidson Cruz · Nov 13, 2020 · 4 min read</p>
+    </header>
+    <article class="post-content"><p><img src="https://cdn-images-1.medium.com/max/8192/0*hcBr_-BUKv8qjPA1" alt="Photo by Irvan Smith on Unsplash"><em>Photo by <a href="https://unsplash.com/@mr_vero?utm_source=medium&amp;utm_medium=referral">Irvan Smith</a> on <a href="https://unsplash.com?utm_source=medium&amp;utm_medium=referral">Unsplash</a></em></p>
+<p>In the next posts, I’ll talk about the <strong>closures</strong> and <strong>lexical environment</strong> . To be easier to understand both. I’ll give more knowledge about context/scope and the difference between them.</p>
+<h2 id="context">Context</h2>
+<p>It’s an object reference in the current code running, or it’s the environment in which the JavaScript code is executed. Says, what is the value of the <strong>this</strong> keyword.</p>
+<p>When we run a code in Javascript, it is always going to be part of an execution context. This execution context can be part of the global execution context or function execution context.</p>
+<p>JavaScript engine creates the execution context in the following two stages: <strong>creation</strong> and <strong>execution</strong> .</p>
+<h3 id="creation-stage">Creation Stage</h3>
+<p>It is the phase that the engine compiles the code and scan the function code to compile it. It doesn’t execute any code.</p>
+<h3 id="execution-stage">Execution Stage</h3>
+<p>It is the phase that the engines will again scan the functions to update the variable object with the values and will execute the code.</p>
+<h2 id="execution-context">Execution Context</h2>
+<p>Represents the <em>environment</em> in which JavaScript runs. It has two types: <strong>Global</strong> <strong>Execution</strong> <strong>Context</strong> and <strong>Function</strong> <strong>Execution</strong> <strong>Context.</strong></p>
+<h3 id="global-execution-context">Global execution context</h3>
+<p>The first step that the Javascript engine does for us it creates a <strong>global execution context</strong> and gives it to us. We can access the global context regardless is on the browser or NodeJs.</p>
+<ul>
+<li>
+<p>Browser: you can access the <strong>window</strong> variable.</p>
+</li>
+<li>
+<p>NodeJs: you can access the <strong>global</strong> variable.</p>
+</li>
+</ul>
+<h3 id="function-execution-context">Function execution context</h3>
+<p>When we run a function, it creates a new execution context. You can access the context information inside the function.</p>
+<p>If you execute three functions, you’ll have one execution context for each function.</p>
+<p>Let’s supposed that we have two functions: <em>FunctionA</em> and <em>FunctionB</em> . We execute the <em>FunctionA</em> and after we execute the <em>FunctionB</em> . We’ll have this in the call stack:</p>
+<p><strong>Global</strong> <strong>execution</strong> <strong>context</strong> → <strong>FunctionA</strong> <strong>execution</strong> <strong>context</strong> → <strong>FunctionB</strong> <strong>execution</strong> <strong>context</strong></p>
+<h2 id="scope">Scope</h2>
+<p>Scope means which variables and expressions are enabled to use when the function is called. It is the current context of the execution.</p>
+<p>There are three types of scope in JavaScript: <strong>Global</strong> <strong>Scope</strong> , <strong>Function</strong> <strong>Scope,</strong> and <strong>Block</strong> <strong>Scope</strong> .</p>
+<h3 id="global-scope">Global Scope</h3>
+<p>Any variable declared outside a function or block is inside the global scope. These variables can be accessed from anywhere in the program.</p>
+<pre><code>var name = &quot;Leidson&quot;;
+</code></pre><pre><code>function hello() {
+  console.log(`Hello ${name}`);
+}
+</code></pre><pre><code>hello(); // Prints 'Hello Leidson';
+</code></pre><h3 id="function-scope--local-scope">Function Scope / Local Scope</h3>
+<p>Any variable declared inside a function. That means is it only accessible inside its function(scope).</p>
+<pre><code>function hello() {
+  var lastName = &quot;Cruz&quot;;
+  console.log(`Hello ${lastName}`);
+}
+</code></pre><pre><code>hello(); // Prints 'Hello Cruz';
+</code></pre><pre><code>console.log(lastName); //Uncaught ReferenceError: lastName is not defined
+</code></pre><h3 id="block-scope">Block Scope</h3>
+<p>Until ES6, JavaScript only had function scope. ES6 introduced <strong>let</strong> and <strong>const</strong> keywords. You can use these new keywords between a pair of curly braces, such if, switch, for, while, and it’ll be block scoped.</p>
+<pre><code>function hello() {
+ if(true){
+   let fullName = &quot;Leidson Cruz&quot;;
+   var age = 31;
+    
+   console.log(fullName); // Prints 'Leidson Cruz'
+  }
+  
+  console.log(age); // Prints '31'
+  
+  console.log(fullname); // Uncaught ReferenceError: fullname is not defined
+}
+</code></pre><pre><code>hello();
+</code></pre><p><em>“Ok, so scope has the own variable and expressions. But I can access a variable from the parent. How is it possible?”.</em></p>
+<p>It’s possible because of the <strong>Scope chain</strong> .</p>
+<h3 id="scope-chain">Scope Chain</h3>
+<p>Every time that a variable is used, the Javascript engine will try to find the variable in the current scope. If it could not find the variable, it will look into the parent scope and will continue to do, until it finds the variable or reaches the global scope.</p>
+<p>For this reason, you can use variables from the parent scope.</p>
+<pre><code>function sayHello(){
+ var name = &quot;Leidson&quot;;
+ let lastName = &quot;Cruz&quot;; 
+</code></pre><pre><code> return function createFullName(){
+   const fullName = `${name} ${lastName}`;
+    
+   return function printHello(){
+     console.log(fullName);
+   }
+ }
+}
+</code></pre><pre><code>sayHello()()(); //Prints 'Leidson Cruz';
+</code></pre><p><em>Can you understand why we can use variables blocked scopes in the children’s functions? Answer in the comments.</em></p>
+<h2 id="conclusion">Conclusion</h2>
+<p>A short explanation of the difference between context and scope is:</p>
+<ul>
+<li>
+<p><strong>Context</strong> is the value of <strong>this</strong> keyword, the property of <strong>execution</strong> <strong>context.</strong></p>
+</li>
+<li>
+<p><strong>Scope</strong> is the visibility of variables and expressions in the current execution context.</p>
+</li>
+</ul>
+<p>The original post is <a href="https://medium.com/@leidson/javascript-context-vs-scope-1a4b5fa0a513">https://medium.com/@leidson/javascript-context-vs-scope-1a4b5fa0a513</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/javascript"><span class="tag">JavaScript</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>363</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2021 Leidson Cruz</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-140735682-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+  </body>
+</html>
