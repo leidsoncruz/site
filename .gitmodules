@@ -1,0 +1,7 @@
+[submodule "themes/hugo-nuo"]
+	path = themes/hugo-nuo
+	url = git@github.com:laozhu/hugo-nuo.git
+	branch = master
+[submodule "public"]
+	path = public
+	url = git@github.com:leidsondias/leidsondias.github.io.git
